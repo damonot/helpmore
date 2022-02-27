@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./index.css">
-    <script src="main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>HelpMore | helpmore.com </title>
   </head>
@@ -58,5 +57,13 @@
       </div>
       
     </div>
+    
+    <script src="../script.js"></script>
+    <script type="application/javascript">
+      function getIP(text) {
+        ipxapi(text.ip);
+      }
+    </script>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
   </body>
 </html>
