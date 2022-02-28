@@ -70,5 +70,3 @@ def main(ip):
     donos = income_to_donation(income, 50)
     print(type(donos))
     return donos
-
-
