@@ -22,11 +22,14 @@
         <div class="card">
           <h2>Select your gift amount</h2>
           <ul class="gift-boxes">
-            <li><a href="#">$25</a></li>
+            {% for dono in recdono %}
+            <li><a href="#">${{dono}}</a></li>            
+            {% endfor %}
+            <!-- <li><a href="#">$25</a></li>
             <li><a href="#">$50</a></li>
             <li><a href="#">$100</a></li>
             <li><a href="#">$300</a></li>
-            <li><a href="#">$500</a></li>
+            <li><a href="#">$500</a></li> -->
           </ul>
           <div class="input">
             <h3>Or, enter your own amount!</h3>
