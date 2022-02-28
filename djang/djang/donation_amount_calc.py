@@ -64,9 +64,9 @@ def income_to_donation(income,last_donation):
             return (donation_amounts)
         
 
-def main(ip):
+def main(ip, lastdono):
     apiresponse = ipxapi(ip)
     income = zip_to_income(apiresponse.text)
-    donos = income_to_donation(income, 50)
+    donos = income_to_donation(income, lastdono)
     print(type(donos))
     return donos
