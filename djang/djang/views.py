@@ -5,9 +5,10 @@ from . import donation_amount_calc
 
 def index(request):
     ip = get('https://api.ipify.org').text
-    # cookie magic
     lastdono = 50
     rec_dono = donation_amount_calc.main(ip, lastdono)
     context = {"recdono": rec_dono}
-    return render(request, 'djang/index.html', context)
+    response = render(request, 'djang/index.html', context)
+    response.set_cookie('donation', '50')
+    return response
     
