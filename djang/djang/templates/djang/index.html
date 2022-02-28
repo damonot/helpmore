@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'djang/index.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>JustGiving | HelpMore</title>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="banner">
+      <nav class="nav"><b><span class="highlight">JustGiving</span> | <span class="highlight">HelpMore</span></b></nav>
+    </div>
+    <div class="content">
+      <div class="left">
+        <div class="title">
+          <div><img class="logo" src="{% static 'djang/media/woodgreen.jpg' %}" alt=""></div>
+          <h1 class="cta">Help us support homeless pets. <br />Donate now.</h1>
+        </div>
+        <div class="card">
+          <h2>Select your gift amount</h2>
+          <ul class="gift-boxes">
+            <li><a href="#">$25</a></li>
+            <li><a href="#">$50</a></li>
+            <li><a href="#">$100</a></li>
+            <li><a href="#">$300</a></li>
+            <li><a href="#">$500</a></li>
+          </ul>
+          <div class="input">
+            <h3>Or, enter your own amount!</h3>
+            <div class="donation">
+              <input type="text">
+            </div>
+            <div>
+              <input type="checkbox">
+              Make my donation private
+            </div>
+          </div>
+          <div><p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity.
+            Adding a small contribution on top of your donation means we can
+              continue to help more people. <a href="" class="help">Find out how</a></b></p></div>
+          <div class="button">
+            <button>Continue</button>
+          </div>
+          <div class="total">Total Amount Null</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="img">
+          <img class="" src="{% static 'djang/media/pompom.jpg' %}" alt="Woodgreen Charity">
+        </div>
+
+        <div>
+          [insert secondary content: money raised card]
+        </div>
+      </div>
+      
+    </div>
+    
+    <script src="{% static 'djang/js/script.js' %}"></script>
+    <script type="application/javascript">
+      function getIP(text) {
+        ipxapi(text.ip);
+      }
+    </script>
+    <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+  </body>
+</html>

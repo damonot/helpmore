@@ -1,0 +1,262 @@
+
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap');
+
+:root{
+    --primary: #97C858;
+    --secondary: #35065A;
+    --purple: #7A04DD;
+    --highlight: #009BF2;
+    --textdark: #c5c5c5;
+}
+body {
+    margin: 0;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    /* background: rgb(66,0,79); */
+}
+
+.bg {
+    background: rgb(188,220,250);
+    background: linear-gradient(85deg, rgba(188,220,250,1) 0%, rgba(119,197,237,1) 15%, rgba(120,91,172,1) 33%, rgba(113,4,221,1) 66%, rgba(84,77,106,1) 100%);     width: 100%;
+    height: 52%;
+    position: absolute;
+    z-index: -1;
+    border-bottom: 3px solid var(--secondary);
+}
+
+.highlight {
+ color: var(--purple);
+}
+
+h1, h2 {
+    text-transform: capitalize;
+    margin: 0;
+}
+
+
+.title {
+    display: flex;
+    /* outline: 1px solid salmon; */
+    margin: 0 0 1rem 0;
+}
+
+.nav {
+    background-color: white;
+    padding: 1em;
+    font-size: 1.3rem;
+    /* height: 2vh; */
+}
+
+.cta {
+    font-size: 3rem;
+    text-align: left;
+    margin-left: 0;
+    color: white;
+    padding-left: 1rem;
+    /* outline: 3px solid yellow; */
+}
+
+.logo {
+    /* outline: 1px solid red; */
+    object-fit: cover;
+    overflow: hidden;
+    margin: 0 0 0 0;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.content  {
+    /* outline: 1px solid cyan; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2rem 10% 0 10%;
+}
+
+.left {
+    width:60%;
+    /* margin-left: 4rem; */
+    /* margin-right: 1em; */
+    /* outline: 3px solid green; */
+}
+
+.right {
+    /* outline: 1px solid pink; */
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+
+
+.card {
+    background-color: white;
+    border-radius: 5px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+    -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+    -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+}
+
+@media only screen and (max-width: 1000px) {
+    .card {
+        width: 100%;
+        margin: auto;
+    }
+    .media {
+        width: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .content {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+    }
+    .left {
+        width: 90%;
+    }
+    .right {
+        width: 0;
+        overflow: hidden;
+    }
+}
+
+.card div {
+    margin: auto;
+    width: 90%;
+}
+
+.card p {
+    background-color: var(--textdark);
+    color: white;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.card h2 {
+    text-align: center;
+    background-color: var(--secondary);
+    color: white;
+    /* outline: 2px solid pink; */
+    margin: 0;
+    padding: .5rem 0 .5rem 0;
+}
+
+.gift-boxes {
+    padding: 0 0 0 0;
+}
+
+ul.gift-boxes {
+    margin: 0;
+    text-align: center;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.gift-boxes li {
+    margin: 1.5rem .4rem 0 .4rem;
+    /* outline: 1px solid green; */
+    padding: .25em .5em .25em .5em;
+    background-color: var(--textdark);
+    border-radius: 5px;
+    font-size: 2.5rem;
+    text-decoration: none;
+}
+
+.gift-boxes li a {
+    text-decoration: none;
+    color: white;
+}
+
+.input h3 {
+    text-align: left;
+    color: var(--secondary);
+    margin-bottom: .25rem;
+}
+
+.input div {
+    text-align: left;
+    width: 100%;   
+}
+
+.input div input[type=text] {
+    width: 100%;
+    height: 4rem;
+    font-size: 4rem;
+    outline: 1px solid var(--textdark);
+    padding: 0 0 0 0;
+    border: none;
+    border-radius: 3px;
+}
+
+.input div input[type=checkbox] {
+    /* outline: 1px solid red; */
+    margin: .5rem 0 1rem -1px;
+}
+
+
+.button button {
+    /* outline: 1px solid blue; */
+    margin: 1rem 0 1rem 0;
+    width: 100%;
+    text-align: center;
+    background-color: var(--purple);
+    color: white;
+    font-size: 2rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.total {
+    text-align: center;
+    /* outline: 1px solid red; */
+    padding: 1rem;
+}
+
+.img {
+    width: 100%;
+    height: 37vh;
+    object-fit: cover;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    border-radius: 25px;
+
+    box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+    -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+    -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+}
+
+
+.fade {
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+  .fade img {
+    border-radius: 50%;
+    display: block;
+    border: 1px solid #fff;
+  }
+  .fade:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: inset 10px 24px 40px 0px white, 
+      inset -10px -24px 40px 0px white, 
+      inset 20px -10px 40px 0px white, 
+      inset -20px 10px 40px 0px white;
+  }
+
+
+
