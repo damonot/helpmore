@@ -10,7 +10,7 @@ def index(request):
 
     lastdono = 50
 
-    lastdono = int( request.COOKIES.get('donation2', '0') )
+    lastdono = int( request.COOKIES.get('donation', '0') )
     print(lastdono)
 
     ip = get('https://api.ipify.org').text
