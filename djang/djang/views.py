@@ -1,25 +1,22 @@
-from asyncio.windows_events import NULL
-from django.http import HttpResponse
 from django.shortcuts import render
 from requests import get
-from . import donation_amount_calc
+from . import donation_amount_calc, cookies
 
 
 
 def index(request):
 
-    lastdono = 50
+    cookies.main(request)
 
-    lastdono = int( request.COOKIES.get('donation', '0') )
-    print(lastdono)
-
+    lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
     rec_dono = donation_amount_calc.main(ip, lastdono)
     context = {"recdono": rec_dono}
 
     response = render(request, 'djang/index.html', context)
-
-    response.set_cookie('donation', '100')
+    #TODO get submitteddono from page
+    submitteddono = 510
+    cookies.setcookie(response, submitteddono)
 
     return response
     
