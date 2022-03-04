@@ -10,8 +10,8 @@ def index(request):
 
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
-    rec_dono = donation_amount_calc.main(ip, lastdono)
-    context = {"recdono": rec_dono}
+    recdono = donation_amount_calc.main(ip, lastdono)
+    context = {"recdono": recdono}
 
     response = render(request, 'djang/index.html', context)
     #TODO get submitteddono from page
