@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import requests
 import os
+from sklearn.linear_model import LinearRegression
 
 def ipxapi(ip):
     pass
@@ -32,41 +33,36 @@ def zip_to_income(data):
     result = int(series.iloc[0])
     return (result)
 
+def round_to_five(number):
+    return 5 * round(number / 5)
 
-def income_to_donation(income,last_donation):
-    donation_amounts = [25,50,100, 250, 500]
-    median_income = int(income)
+def regression_to_donation(pred_donation):
+    suggested_donations = []
+    predicted_donation = int(pred_donation)
+    step = (predicted_donation - 25)//4 
     
-    if median_income < 45000:
-        return (donation_amounts)
+    for i in range(25, predicted_donation + 25, step):
+        suggested_donations.append(round_to_five(i))
+    return suggested_donations
 
-    elif 45000 <= median_income < 100000:
-        if last_donation > 0:
-            donation_amounts = [last_donation, last_donation*2,last_donation *3,last_donation *4,last_donation *5]
-            return (donation_amounts)
-        else: 
-            donation_amounts  = [element * 2 for element in donation_amounts]
-            return (donation_amounts)  
-
-    elif 100000 <= median_income < 200000:
-        if last_donation > 0:
-            donation_amounts = [last_donation, last_donation*2,last_donation *3,last_donation *4,last_donation *5]
-            return (donation_amounts)
-        else: 
-            donation_amounts  = [element * 3 for element in donation_amounts]
-            return (donation_amounts)
-
-    elif median_income >= 200000:
-        if last_donation > 0:
-            donation_amounts = [last_donation, last_donation*2,last_donation *3,last_donation *4,last_donation *5]
-            return (donation_amounts)
-        else: 
-            donation_amounts  = [element * 4 for element in donation_amounts]
-            return (donation_amounts)
-        
+def regression(median_income,last_donation=0):
+    data = {'MedianIncome': [15000,20000,40000,75000,150000,200000,14000,27000,34000,50000,100000,250000], 
+            'PrevDonation':[0,0,0,0,0,0,45,90,66,105,50,125],
+            'CurrDonation':[100, 133.33, 233.33, 312.5, 375, 500, 83, 180,198.33,208.33,250,625]}
+    df = pd.DataFrame(data)
+    
+    x = df[['MedianIncome','PrevDonation']]
+    y = df['CurrDonation'].values.reshape(-1,1)
+    model = LinearRegression().fit(x, y)
+    
+    last_donation = float(last_donation)
+    y_pred = model.predict([[median_income,last_donation]])
+    pred_donation = round_to_five(y_pred[0][0])
+    return (regression_to_donation(pred_donation))
+    #append df with median_income,last_donation, and curr donation when we have real data#
 
 def main(ip, lastdono):
     apiresponse = ipxapi(ip)
     income = zip_to_income(apiresponse.text)
-    donos = income_to_donation(income, lastdono)
+    donos = regression(income, lastdono)
     return donos
