@@ -4,6 +4,7 @@ import requests
 import os
 
 def ipxapi(ip):
+    pass
     url = "https://ipxapi.com/api/ip?ip="+ip
     
     headers = {
@@ -68,5 +69,4 @@ def main(ip, lastdono):
     apiresponse = ipxapi(ip)
     income = zip_to_income(apiresponse.text)
     donos = income_to_donation(income, lastdono)
-    print(type(donos))
     return donos
