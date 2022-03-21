@@ -5,7 +5,6 @@ import os
 from sklearn.linear_model import LinearRegression
 
 def ipxapi(ip):
-    pass
     url = "https://ipxapi.com/api/ip?ip="+ip
     
     headers = {
@@ -45,7 +44,7 @@ def regression_to_donation(pred_donation):
         suggested_donations.append(round_to_five(i))
     return suggested_donations
 
-def regression(median_income,last_donation=0):
+def regression(median_income,last_donation):
     data = {'MedianIncome': [15000,20000,40000,75000,150000,200000,14000,27000,34000,50000,100000,250000], 
             'PrevDonation':[0,0,0,0,0,0,45,90,66,105,50,125],
             'CurrDonation':[100, 133.33, 233.33, 312.5, 375, 500, 83, 180,198.33,208.33,250,625]}
