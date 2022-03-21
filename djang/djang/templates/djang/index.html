@@ -20,14 +20,23 @@
           <h1 class="cta">Help us support homeless pets. <br />Donate now.</h1>
         </div>
         <div class="card">
+          <form action = "" method = "post">
+            {% csrf_token %}
           <h2>Select your gift amount</h2>
           <ul class="gift-boxes">
-            {% for dono in recdono %}
-            <li><a href="#">${{dono}}</a></li>            
-            {% endfor %}
+
+
+              {{form }}
+
+            <!-- {% for dono in recdono %}
+              <li>
+                <input type='radio' id=${{dono}}/>
+                <label for=${{dono}}>${{dono}}</label>
+              </li>            
+            {% endfor %} -->
           </ul>
           <div class="input">
-            <h3>Or, enter your own amount!</h3>
+            <h3>Or, enter a custom amount below.</h3>
             <div class="donation">
               <input type="text">
             </div>
@@ -40,19 +49,21 @@
             Adding a small contribution on top of your donation means we can
               continue to help more people. <a href="" class="help">Find out how</a></b></p></div>
           <div class="button">
-            <button>Continue</button>
+            <input type="submit" value="Continue">
           </div>
-          <div class="total">Total Amount Null</div>
+          <!-- <div class="total">Total Amount Null</div> -->
+
+        </form>
         </div>
       </div>
       <div class="right">
         <div class="img">
-          <img class="" src="{% static 'djang/media/pompom.jpg' %}" alt="Woodgreen Charity">
+          <img class="" src="{% static 'djang/media/temp-progress.png' %}" alt="Woodgreen Charity">
         </div>
 
-        <div>
+        <!-- <div>
           [insert secondary content: money raised card]
-        </div>
+        </div> -->
       </div>
       
     </div>

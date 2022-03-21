@@ -2,21 +2,26 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap');
 
 :root{
-    --primary: #97C858;
-    --secondary: #35065A;
-    --purple: #7A04DD;
-    --highlight: #009BF2;
-    --textdark: #c5c5c5;
+    --primary: #C4C4C4;
+    --secondary: #8A8383;
+    --purple: #6108A7;
+    --highlight: #1C66D2;
+    --textdark: #575050;
+    --black: #0F0E0E;
 }
 body {
     margin: 0;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     /* background: rgb(66,0,79); */
+    font-weight: 300;
 }
 
 .bg {
     background: rgb(188,220,250);
     background: linear-gradient(85deg, rgba(188,220,250,1) 0%, rgba(119,197,237,1) 15%, rgba(120,91,172,1) 33%, rgba(113,4,221,1) 66%, rgba(84,77,106,1) 100%);     width: 100%;
+    
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url('./media/pompom.jpg');
+    /* background-position: cover; */
     height: 52%;
     position: absolute;
     z-index: -1;
@@ -30,6 +35,8 @@ body {
 h1, h2 {
     text-transform: capitalize;
     margin: 0;
+    font-weight: 300;
+    color: var(--black);
 }
 
 
@@ -50,9 +57,7 @@ h1, h2 {
     font-size: 3rem;
     text-align: left;
     margin-left: 0;
-    color: white;
     padding-left: 1rem;
-    /* outline: 3px solid yellow; */
 }
 
 .logo {
@@ -100,48 +105,23 @@ h1, h2 {
     -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
 }
 
-@media only screen and (max-width: 1000px) {
-    .card {
-        width: 100%;
-        margin: auto;
-    }
-    .media {
-        width: 0;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .content {
-        width: 100%;
-        margin: 0;
-        justify-content: center;
-    }
-    .left {
-        width: 90%;
-    }
-    .right {
-        width: 0;
-        overflow: hidden;
-    }
-}
-
 .card div {
     margin: auto;
     width: 90%;
 }
 
 .card p {
-    background-color: var(--textdark);
-    color: white;
+    background-color: var(--primary);
+    color: var(--black);
     padding: 1rem;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .card h2 {
     text-align: center;
-    background-color: var(--secondary);
-    color: white;
-    /* outline: 2px solid pink; */
+    background-color: var(--primary);
+    color: var(--black);
+    font-weight: 400;
     margin: 0;
     padding: .5rem 0 .5rem 0;
 }
@@ -159,25 +139,31 @@ ul.gift-boxes {
     flex-wrap: wrap;
 }
 
-.gift-boxes li {
-    margin: 1.5rem .4rem 0 .4rem;
-    /* outline: 1px solid green; */
-    padding: .25em .5em .25em .5em;
-    background-color: var(--textdark);
-    border-radius: 5px;
-    font-size: 2.5rem;
-    text-decoration: none;
-}
-
-.gift-boxes li a {
-    text-decoration: none;
+.gift-boxes div > div {
     color: white;
+    font-size: 1.5rem;
+    width: 20%;
+    display: inline-block;
+    padding: .25em 1.5em .25em .5em;
+    margin: 1.5rem .4rem 0 .4rem;
+    background-color: var(--highlight);
+} .gift-boxes div > div:hover {
+    background-color: #97C858;
+    transition: .25s ease;
+}  .gift-boxes div > label:focus {
+    background-color: #97C858;
+    transition: .25s ease;
+} .gift-boxes input {
+    visibility: hidden;
+} .gift-boxes label {
+    cursor: pointer;
 }
 
 .input h3 {
     text-align: left;
-    color: var(--secondary);
     margin-bottom: .25rem;
+    color: var(--textdark);
+    font-weight: 300;
 }
 
 .input div {
@@ -188,33 +174,37 @@ ul.gift-boxes {
 .input div input[type=text] {
     width: 100%;
     height: 4rem;
-    font-size: 4rem;
+    font-size: 3.5rem;
     outline: 1px solid var(--textdark);
-    padding: 0 0 0 0;
+    padding: 0 0 .25rem 1rem;
     border: none;
     border-radius: 3px;
+    color: var(--highlight);
 }
 
 .input div input[type=checkbox] {
     /* outline: 1px solid red; */
     margin: .5rem 0 1rem -1px;
+    color: var(--textdark);
 }
 
 
-.button button {
+.button input {
     /* outline: 1px solid blue; */
     margin: 1rem 0 1rem 0;
     width: 100%;
     text-align: center;
-    background-color: var(--purple);
+    background-color: var(--highlight);
     color: white;
     font-size: 2rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .total {
     text-align: center;
-    /* outline: 1px solid red; */
     padding: 1rem;
 }
 
@@ -260,3 +250,27 @@ ul.gift-boxes {
 
 
 
+  @media only screen and (max-width: 1000px) {
+    .card {
+        width: 100%;
+        margin: auto;
+    }
+    .media {
+        width: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .content {
+        width: 100%;
+        margin: 0;
+        justify-content: center;
+    }
+    .left {
+        width: 90%;
+    }
+    .right {
+        width: 0;
+        overflow: hidden;
+    }
+}
