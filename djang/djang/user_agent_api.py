@@ -64,7 +64,7 @@ def main( request ):
     # Now you have "result_json" and can store, display or process any part of the response.
 
     # -- print the entire json dump for reference
-    print(json.dumps(result_json, indent=2))
+    #print(json.dumps(result_json, indent=2))
 
 
     # -- Copy the data to some variables for easier use
