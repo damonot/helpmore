@@ -38,10 +38,10 @@ def round_to_five(number):
 def regression_to_donation(pred_donation):
     suggested_donations = []
     predicted_donation = int(pred_donation)
-    step = (predicted_donation - 25)//4 
+    suggested = np.linspace(25,predicted_donation,5)
     
-    for i in range(25, predicted_donation + 25, step):
-        suggested_donations.append(round_to_five(i))
+    for dono in suggested:
+        suggested_donations.append(round_to_five(dono))
     return suggested_donations
 
 def regression(median_income,last_donation):
