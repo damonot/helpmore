@@ -54,10 +54,15 @@ def regression(median_income,last_donation):
     y = df['CurrDonation'].values.reshape(-1,1)
     model = LinearRegression().fit(x, y)
     
-    last_donation = float(last_donation)
-    y_pred = model.predict([[median_income,last_donation]])
-    pred_donation = round_to_five(y_pred[0][0])
-    return (regression_to_donation(pred_donation))
+     if last_donation != 0: 
+        sugg_donation = [last_donation,last_donation * 2, last_donation *3, last_donation * 4,last_donation*5]
+        return sugg_donation
+    else:
+        last_donation = float(last_donation)
+        y_pred = model.predict([[income,last_donation]])
+        pred_donation = round_to_five(y_pred[0][0])
+        return (regression_to_donation(pred_donation))
+    
     #append df with median_income,last_donation, and curr donation when we have real data#
 
 def main(ip, lastdono):
