@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from requests import get
-from . import donation_amount_calc, cookies, user_agent_api #,fiftyone_api
+from . import donation_amount_calc, cookies, fiftyone_api
 
 from .forms import DonationForm
 
@@ -17,8 +17,9 @@ def index(request):
 
     cookies.main(request)
 
-    user_agent_parse = user_agent_api.main(request)
-    #fiftyone_api.main(request)
+    userinfo = fiftyone_api.main(request)
+
+    print(userinfo)
 
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
