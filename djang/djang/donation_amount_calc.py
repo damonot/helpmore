@@ -3,6 +3,7 @@ import json
 import requests
 import os
 from sklearn.linear_model import LinearRegression
+import numpy as np
 
 def ipxapi(ip):
     url = "https://ipxapi.com/api/ip?ip="+ip
@@ -54,12 +55,12 @@ def regression(median_income,last_donation):
     y = df['CurrDonation'].values.reshape(-1,1)
     model = LinearRegression().fit(x, y)
     
-     if last_donation != 0: 
+    if last_donation != 0: 
         sugg_donation = [last_donation,last_donation * 2, last_donation *3, last_donation * 4,last_donation*5]
         return sugg_donation
     else:
         last_donation = float(last_donation)
-        y_pred = model.predict([[income,last_donation]])
+        y_pred = model.predict([[median_income,last_donation]])
         pred_donation = round_to_five(y_pred[0][0])
         return (regression_to_donation(pred_donation))
     
