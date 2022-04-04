@@ -11,30 +11,23 @@
   <body>
     <div class="bg"></div>
     <div class="banner">
-      <nav class="nav"><b><span class="highlight">JustGiving</span> | <span class="highlight">HelpMore</span></b></nav>
+      <nav><img src="https://www.jg-cdn.com/chrome/1512e535e420ee8a905d8ad330c77819.svg" alt=""></nav>
+    </div>
+    <div class="title">
+      <div><img class="logo" src="{% static 'djang/media/woodgreen.jpg' %}" alt=""></div>
     </div>
     <div class="content">
-      <div class="left">
-        <div class="title">
-          <div><img class="logo" src="{% static 'djang/media/woodgreen.jpg' %}" alt=""></div>
-          <h1 class="cta">Help us support homeless pets. <br />Donate now.</h1>
-        </div>
-        <div class="card">
-          <form action = "" method = "post">
-            {% csrf_token %}
+
+
+      <div class="card">
+        <form action = "" method = "post">
+          {% csrf_token %}
           <h2>Select your gift amount</h2>
+          {{ form }}
           <ul class="gift-boxes">
-
-
-              {{form }}
-
-            <!-- {% for dono in recdono %}
-              <li>
-                <input type='radio' id=${{dono}}/>
-                <label for=${{dono}}>${{dono}}</label>
-              </li>            
-            {% endfor %} -->
+            <!-- {{ form }} -->
           </ul>
+
           <div class="input">
             <h3>Or, enter a custom amount below.</h3>
             <div class="donation">
@@ -42,28 +35,18 @@
             </div>
             <div>
               <input type="checkbox">
-              Make my donation private
+              Hide donation amount from the public
             </div>
           </div>
+          
           <div><p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity.
             Adding a small contribution on top of your donation means we can
-              continue to help more people. <a href="" class="help">Find out how</a></b></p></div>
+              continue to help more people. <a href="" class="help">Find out how</a></b></p>
+          </div>
           <div class="button">
             <input type="submit" value="Continue">
           </div>
-          <!-- <div class="total">Total Amount Null</div> -->
-
         </form>
-        </div>
-      </div>
-      <div class="right">
-        <div class="img">
-          <img class="" src="{% static 'djang/media/temp-progress.png' %}" alt="Woodgreen Charity">
-        </div>
-
-        <!-- <div>
-          [insert secondary content: money raised card]
-        </div> -->
       </div>
       
     </div>

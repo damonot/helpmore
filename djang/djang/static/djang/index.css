@@ -5,8 +5,8 @@
     --primary: #C4C4C4;
     --secondary: #8A8383;
     --purple: #6108A7;
-    --highlight: #1C66D2;
-    --textdark: #575050;
+    --highlight: rgb(29, 102, 211);
+    --textdark: #231F20;
     --black: #0F0E0E;
 }
 body {
@@ -17,15 +17,15 @@ body {
 }
 
 .bg {
-    background: rgb(188,220,250);
-    background: linear-gradient(85deg, rgba(188,220,250,1) 0%, rgba(119,197,237,1) 15%, rgba(120,91,172,1) 33%, rgba(113,4,221,1) 66%, rgba(84,77,106,1) 100%);     width: 100%;
-    
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url('./media/pompom.jpg');
-    /* background-position: cover; */
-    height: 52%;
+    /* background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url('./media/pompom.jpg'); */
+    background-image: url('./media/pompom.jpg');
+    background-size: cover;
+    filter: blur(3px);
+    height: 100%;
+    width: 100%;
     position: absolute;
+    outline: 1px solid red;
     z-index: -1;
-    border-bottom: 3px solid var(--secondary);
 }
 
 .highlight {
@@ -36,7 +36,7 @@ h1, h2 {
     text-transform: capitalize;
     margin: 0;
     font-weight: 300;
-    color: var(--black);
+    color: var(--textdark);
 }
 
 
@@ -44,13 +44,19 @@ h1, h2 {
     display: flex;
     /* outline: 1px solid salmon; */
     margin: 0 0 1rem 0;
+    justify-content: center;
 }
 
-.nav {
+nav {
     background-color: white;
-    padding: 1em;
+    padding: .5em;
     font-size: 1.3rem;
     /* height: 2vh; */
+
+} nav img {
+    width: 8rem;
+    height: auto;
+    vertical-align: middle;
 }
 
 .cta {
@@ -61,12 +67,13 @@ h1, h2 {
 }
 
 .logo {
-    /* outline: 1px solid red; */
     object-fit: cover;
     overflow: hidden;
-    margin: 0 0 0 0;
     width: 150px;
-    border-radius: 5px;
+    margin: auto;
+    padding: 0 8rem .25rem 8rem;
+    background-color: white;
+    border-radius: 0 0 10px 10px;
 }
 
 .content  {
@@ -74,56 +81,39 @@ h1, h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 2rem 10% 0 10%;
+    margin: 2rem 25% 0 25%;
 }
-
-.left {
-    width:60%;
-    /* margin-left: 4rem; */
-    /* margin-right: 1em; */
-    /* outline: 3px solid green; */
-}
-
-.right {
-    /* outline: 1px solid pink; */
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-}
-
-
 
 .card {
     background-color: white;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
     width: 100%;
     overflow: hidden;
     box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
     -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
     -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
+    padding-bottom: 2rem;
 }
 
 .card div {
     margin: auto;
-    width: 90%;
+    /* outline: 1px solid red; */
+    width: 95%;
 }
 
 .card p {
-    background-color: var(--primary);
+    background-color: rgba(29, 102, 211, .12);
     color: var(--black);
-    padding: 1rem;
+    padding: 2rem;
     font-size: 1.2rem;
+    text-align: center;
 }
 
 .card h2 {
-    text-align: center;
-    background-color: var(--primary);
-    color: var(--black);
     font-weight: 400;
+    text-align: center;
     margin: 0;
-    padding: .5rem 0 .5rem 0;
+    padding: 1rem 0 .5rem 0;
 }
 
 .gift-boxes {
@@ -160,9 +150,9 @@ ul.gift-boxes {
 }
 
 .input h3 {
-    text-align: left;
-    margin-bottom: .25rem;
-    color: var(--textdark);
+    text-align: center;
+    margin-bottom: .5rem;
+    color: var(--secondary);
     font-weight: 300;
 }
 
@@ -172,10 +162,11 @@ ul.gift-boxes {
 }
 
 .input div input[type=text] {
-    width: 100%;
+    outline: 10px solid blue;
+    width: 98%;
     height: 4rem;
     font-size: 3.5rem;
-    outline: 1px solid var(--textdark);
+    outline: 1px solid var(--primary);
     padding: 0 0 .25rem 1rem;
     border: none;
     border-radius: 3px;
@@ -183,24 +174,31 @@ ul.gift-boxes {
 }
 
 .input div input[type=checkbox] {
-    /* outline: 1px solid red; */
     margin: .5rem 0 1rem -1px;
-    color: var(--textdark);
+    color: var(--primary);
+} .input div {
+    /* margin: 1px 0 0 1px; */
+    color: var(--secondary);
+    padding: .25rem;
 }
-
 
 .button input {
     /* outline: 1px solid blue; */
     margin: 1rem 0 1rem 0;
     width: 100%;
+    padding: .5rem;
     text-align: center;
     background-color: var(--highlight);
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: 'M PLUS Rounded 1c', sans-serif;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.171);
+    /* -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
+    /* -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
 }
 
 .total {
