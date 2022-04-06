@@ -19,11 +19,11 @@ def index(request):
 
     userinfo = fiftyone_api.main(request)
 
-    print(userinfo)
+    #print(userinfo)
 
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
-    recdono = donation_amount_calc.main(ip, lastdono)
+    recdono = donation_amount_calc.main(ip, lastdono, userinfo)
 
     writedono(recdono)
 
