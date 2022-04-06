@@ -20,16 +20,20 @@
 
 
       <div class="card">
-        <form action = "" method = "post">
+        <form action="" method="POST">
           {% csrf_token %}
           <h2>Select your gift amount</h2>
-          {{ form }}
+
           <ul class="gift-boxes">
-            <!-- {{ form }} -->
+            {% for dono in  recdono %}
+            <button type="button" class="featuredBtn" id={{ dono }} value="{{dono}}">
+              {{ dono }}
+            </button>
+            {% endfor %}
           </ul>
 
           <div class="input">
-            <h3>Or, enter a custom amount below.</h3>
+            <h3>Or, enter your own amount below.</h3>
             <div class="donation">
               <input type="text">
             </div>
@@ -39,10 +43,11 @@
             </div>
           </div>
           
-          <div><p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity.
+          <!-- <div><p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity.
             Adding a small contribution on top of your donation means we can
               continue to help more people. <a href="" class="help">Find out how</a></b></p>
-          </div>
+          </div> -->
+          
           <div class="button">
             <input type="submit" value="Continue">
           </div>
@@ -50,5 +55,14 @@
       </div>
       
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $('button').click(function () {
+        $('button').removeClass('active');
+        $(this).addClass('active');
+      });
+    </script>
+
   </body>
 </html>

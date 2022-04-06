@@ -1,8 +1,9 @@
+from re import sub
 from django.shortcuts import render
 from requests import get
 from . import donation_amount_calc, cookies, fiftyone_api
 
-from .forms import DonationForm
+from .forms import DonationForm, Form2, DynamicForm
 
 
 def writedono(list):
@@ -24,22 +25,36 @@ def index(request):
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
     recdono = donation_amount_calc.main(ip, lastdono)
+    print(recdono)
 
-    writedono(recdono)
 
-    context = {"recdono": recdono, "form": DonationForm()}
+    CHOICES= [
+    ('0', str(recdono[0])),
+    ('1', str(recdono[1])),
+    ('2', str(recdono[2])),
+    ('3', str(recdono[3])),
+    ('4', str(recdono[4])),
+    ]
+    #form = Form2(request.POST, fields=CHOICES)
+    form = DonationForm(request.POST)
 
+    context = {"recdono": recdono, "form": form}
     response = render(request, 'djang/index.html', context)
-    
-    form= DonationForm(request.POST or None)
-    
+
     formdata = None
     if form.is_valid():
-        formdata= form.cleaned_data.get("dono_options")
-        # print(data)
-        # print(recdono[data])
+        formdata = form.cleaned_data.get("dono_options")
 
-    submitteddono = recdono[formdata]
+    if formdata is None:
+        submitteddono = lastdono
+    else:
+        submitteddono = recdono[formdata-1]
+    print("SUMBITTED DONO " + str(submitteddono))
     cookies.setcookie(response, submitteddono)
+
+    tip = int(submitteddono * .15)
+    link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
+
+    print(link)
+
     return response
-    

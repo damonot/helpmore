@@ -57,6 +57,7 @@ nav {
     width: 8rem;
     height: auto;
     vertical-align: middle;
+    user-select: none;
 }
 
 .cta {
@@ -74,6 +75,7 @@ nav {
     padding: 0 8rem .25rem 8rem;
     background-color: white;
     border-radius: 0 0 10px 10px;
+    user-select: none;
 }
 
 .content  {
@@ -129,15 +131,32 @@ ul.gift-boxes {
     flex-wrap: wrap;
 }
 
-.gift-boxes div > div {
-    color: white;
-    font-size: 1.5rem;
-    width: 20%;
-    display: inline-block;
-    padding: .25em 1.5em .25em .5em;
-    margin: 1.5rem .4rem 0 .4rem;
+ul.gift-boxes > button {
+    all: unset;
+    transition: .2s ease-in-out;
+    padding: 1rem;
+    /* outline: 1px solid var(--primary); */
+}
+
+.featuredBtn.active {
     background-color: var(--highlight);
-} .gift-boxes div > div:hover {
+    color: white;
+  }
+
+ul.gift-boxes > button {
+    color: var(--textdark);
+    border: 1px solid var(--secondary);
+    font-size: 1.5rem;
+    width: 15%;
+    display: inline-block;
+    padding: .75em 0 .75em 0;
+    margin: 1.5rem .25rem 0 .25rem;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* } .gift-boxes div > div:hover {
     background-color: #97C858;
     transition: .25s ease;
 }  .gift-boxes div > label:focus {
@@ -146,8 +165,8 @@ ul.gift-boxes {
 } .gift-boxes input {
     visibility: hidden;
 } .gift-boxes label {
-    cursor: pointer;
-}
+
+} */
 
 .input h3 {
     text-align: center;
@@ -158,19 +177,27 @@ ul.gift-boxes {
 
 .input div {
     text-align: left;
-    width: 100%;   
-}
-
-.input div input[type=text] {
-    outline: 10px solid blue;
-    width: 98%;
+    width: 100%;  
+    /* outline: 1px solid red;  */
+    border-radius: 3px;
+    margin: auto;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+} .input div input[type=text] {
+    width: inherit;
     height: 4rem;
     font-size: 3.5rem;
-    outline: 1px solid var(--primary);
-    padding: 0 0 .25rem 1rem;
     border: none;
-    border-radius: 3px;
+    margin: auto;
     color: var(--highlight);
+    text-align: center;
+} .input div input[type=text]:focus {
+    outline: none;
+}
+
+.donation {
+    border: 2px solid var(--primary);
 }
 
 .input div input[type=checkbox] {
@@ -183,7 +210,7 @@ ul.gift-boxes {
 }
 
 .button input {
-    /* outline: 1px solid blue; */
+
     margin: 1rem 0 1rem 0;
     width: 100%;
     padding: .5rem;
@@ -195,7 +222,7 @@ ul.gift-boxes {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-
+    user-select: none;
     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.171);
     /* -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
     /* -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
@@ -219,6 +246,8 @@ ul.gift-boxes {
     -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
     -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
 }
+
+
 
 
 .fade {
@@ -258,17 +287,10 @@ ul.gift-boxes {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
     .content {
         width: 100%;
-        margin: 0;
+        margin: auto;
         justify-content: center;
-    }
-    .left {
-        width: 90%;
-    }
-    .right {
-        width: 0;
-        overflow: hidden;
     }
 }
