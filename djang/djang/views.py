@@ -1,5 +1,5 @@
 from re import sub
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from requests import get
 from . import donation_amount_calc, cookies, fiftyone_api
 
@@ -43,21 +43,17 @@ def index(request):
     if form.is_valid():
         form_select= int(form.cleaned_data.get("my_field"))
 
-    if form_select is None:
-        submitteddono = lastdono
+        if form_select is None:
+            submitteddono = lastdono
+        else:
+            submitteddono = form_select
+        print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
+
+        # print("SUMBITTED DONO " + str(submitteddono))
+        cookies.setcookie(response, submitteddono)
+
+        tip = int(submitteddono * .15)
+        link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
+        return redirect(link)
     else:
-        submitteddono = form_select
-    print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
-
-    # print("SUMBITTED DONO " + str(submitteddono))
-    cookies.setcookie(response, submitteddono)
-
-    tip = int(submitteddono * .15)
-    link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
-
-
-
-    # print(link)
-    # print("post request")
-    # print(request.POST)
-    return response
+        return response
