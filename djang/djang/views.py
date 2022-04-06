@@ -49,11 +49,15 @@ def index(request):
             submitteddono = form_select
         print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
 
-        # print("SUMBITTED DONO " + str(submitteddono))
+        print("SETTING COOKIE TO: "+str(submitteddono))
+        #response.set_cookie("donation", submitteddono)
         cookies.setcookie(response, submitteddono)
+        print(cookies.getcookie(request))
 
         tip = int(submitteddono * .15)
         link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
         return redirect(link)
+        #return response
     else:
+        cookies.setcookie(response, lastdono)
         return response

@@ -15,7 +15,7 @@ def getcookie(request):
     else:
         donation_cookie = int( request.COOKIES.get('donation', '0') )
 
-    print("dono cookie"+ str(donation_cookie))
+    print("GET COOKIE: "+ str(donation_cookie))
     return donation_cookie
 
 
