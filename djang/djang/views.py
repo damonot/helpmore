@@ -3,7 +3,7 @@ from django.shortcuts import render
 from requests import get
 from . import donation_amount_calc, cookies, fiftyone_api
 
-from .forms import DonationForm, Form2, DynamicForm
+from .forms import DonationForm, MyCustomForm
 
 
 def writedono(list):
@@ -27,28 +27,20 @@ def index(request):
     recdono = donation_amount_calc.main(ip, lastdono)
     print(recdono)
 
-
-    CHOICES= [
+    list_of_tuples=[    
     ('0', str(recdono[0])),
     ('1', str(recdono[1])),
     ('2', str(recdono[2])),
     ('3', str(recdono[3])),
     ('4', str(recdono[4])),
     ]
-    #form = Form2(request.POST, fields=CHOICES)
-    form = DonationForm(request.POST)
+    
+    form = MyCustomForm(my_choices=list_of_tuples)
 
     context = {"recdono": recdono, "form": form}
     response = render(request, 'djang/index.html', context)
 
-    formdata = None
-    if form.is_valid():
-        formdata = form.cleaned_data.get("dono_options")
-
-    if formdata is None:
-        submitteddono = lastdono
-    else:
-        submitteddono = recdono[formdata-1]
+    submitteddono = 0
     print("SUMBITTED DONO " + str(submitteddono))
     cookies.setcookie(response, submitteddono)
 
@@ -56,5 +48,6 @@ def index(request):
     link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
 
     print(link)
-
+    print("post request")
+    print(request.POST.get("myselectedbtn"))
     return response

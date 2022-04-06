@@ -9,7 +9,13 @@ CHOICES= [
     ('2', str(dono[2])),
     ('3', str(dono[3])),
     ('4', str(dono[4])),
-    ]
+]
 
 class DonationForm(forms.Form):
     dono_options= forms.IntegerField(label='', widget=forms.RadioSelect(choices=CHOICES))
+
+class MyCustomForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        choices = kwargs.pop('my_choices')
+        super(MyCustomForm, self).__init__(*args, **kwargs)
+        self.fields["my_field"] = forms.ChoiceField(choices=choices, widget=forms.RadioSelect, label='')

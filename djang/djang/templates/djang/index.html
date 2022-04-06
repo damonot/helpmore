@@ -24,12 +24,15 @@
           {% csrf_token %}
           <h2>Select your gift amount</h2>
 
+          {{ form }}
+
           <ul class="gift-boxes">
-            {% for dono in  recdono %}
-            <button type="button" class="featuredBtn" id={{ dono }} value="{{dono}}">
+
+            <!-- {% for dono in  recdono %}
+            <button type="button" class="featuredBtn" name="myselectedbtn" id={{ dono }} value="{{dono}}">
               {{ dono }}
             </button>
-            {% endfor %}
+            {% endfor %} -->
           </ul>
 
           <div class="input">
@@ -58,8 +61,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-      $('button').click(function () {
-        $('button').removeClass('active');
+      $('#id_my_field div').click(function () {
+        $('#id_my_field div').removeClass('active');
         $(this).addClass('active');
       });
     </script>

@@ -118,55 +118,33 @@ nav {
     padding: 1rem 0 .5rem 0;
 }
 
-.gift-boxes {
-    padding: 0 0 0 0;
-}
-
-ul.gift-boxes {
-    margin: 0;
-    text-align: center;
-    list-style: none;
+#id_my_field {
+    /* outline: 1px solid blue; */
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-ul.gift-boxes > button {
-    all: unset;
-    transition: .2s ease-in-out;
-    padding: 1rem;
-    /* outline: 1px solid var(--primary); */
-}
-
-.featuredBtn.active {
+} #id_my_field div.active {
     background-color: var(--highlight);
     color: white;
-  }
-
-ul.gift-boxes > button {
-    color: var(--textdark);
+} #id_my_field > div  {
+    all: none;
     border: 1px solid var(--secondary);
-    font-size: 1.5rem;
-    width: 15%;
-    display: inline-block;
-    padding: .75em 0 .75em 0;
-    margin: 1.5rem .25rem 0 .25rem;
-    border-radius: 5px;
-    user-select: none;
-    cursor: pointer;
-}
-
-/* } .gift-boxes div > div:hover {
-    background-color: #97C858;
-    transition: .25s ease;
-}  .gift-boxes div > label:focus {
-    background-color: #97C858;
-    transition: .25s ease;
-} .gift-boxes input {
+    padding: .75em 0 .75em 0em;
+    width: 18%;
+    display: flex;
+    text-align: center;
+    padding-right: .5rem;
+    justify-content: space-evenly;
+    transition: .2s ease-in-out;
+} #id_my_field label {
+    text-align: left;
+    /* outline: 1px solid red; */
+    width: fit-content;
+    margin: auto;
+    padding-right: .25rem;
+} input[type="radio"] {
     visibility: hidden;
-} .gift-boxes label {
-
-} */
+    width: 0;
+    height: 0;
+}
 
 .input h3 {
     text-align: center;
