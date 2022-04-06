@@ -35,7 +35,7 @@ def index(request):
     ('4', str(recdono[4])),
     ]
     
-    form = MyCustomForm(my_choices=list_of_tuples)
+    form = MyCustomForm(request.POST, my_choices=list_of_tuples)
 
     context = {"recdono": recdono, "form": form}
     response = render(request, 'djang/index.html', context)
@@ -47,7 +47,14 @@ def index(request):
     tip = int(submitteddono * .15)
     link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
 
-    print(link)
+    form_select = None
+    if form.is_valid():
+        form_select= form.cleaned_data.get("my_field")
+    
+    print("\n\n\nFORM DATA")
+    print(form_select)
+
+    # print(link)
     print("post request")
-    print(request.POST.get("myselectedbtn"))
+    print(request.POST)
     return response
