@@ -134,16 +134,29 @@ nav {
     padding-right: .5rem;
     justify-content: space-evenly;
     transition: .2s ease-in-out;
+    cursor: pointer;
 } #id_my_field label {
     text-align: left;
     /* outline: 1px solid red; */
     width: fit-content;
     margin: auto;
     padding-right: .25rem;
+    user-select: none;
+    cursor: pointer;
 } input[type="radio"] {
     visibility: hidden;
     width: 0;
     height: 0;
+}
+
+.errorlist {
+    /* outline: 1px solid red; */
+    list-style: none;
+    color: red;
+    height: 0;
+    overflow: hidden;
+    text-align: center;
+    padding: 0;
 }
 
 .input h3 {
