@@ -24,7 +24,8 @@ def index(request):
 
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
-    recdono = donation_amount_calc.main(ip, lastdono)
+
+    recdono = donation_amount_calc.main(ip, lastdono, userinfo)
     print(recdono)
 
     list_of_tuples=[    
@@ -37,6 +38,7 @@ def index(request):
     form = MyCustomForm(request.POST, my_choices=list_of_tuples)
 
     context = {"recdono": recdono, "form": form}
+    
     response = render(request, 'djang/index.html', context)
 
     form_select = None
