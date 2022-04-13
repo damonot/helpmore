@@ -11,7 +11,7 @@ def check_property(property):
     return property.no_value_message()
 
 # Create the engines required.
-cloudRequestEngine = CloudRequestEngine({"resource_key": "AQRoCk2bbGnvyKYK2kg"})
+cloudRequestEngine = CloudRequestEngine({"resource_key": "AQSZCf4SD7B8OXoc2kg"})
 deviceDetectionCloudEngine = DeviceDetectionCloud()
 
 # Create a simple pipeline to access the engine with.
@@ -31,13 +31,11 @@ def main( request ):
     # Process the flowdata.
     flowData.process()
 
-    # Retreive the properties.
-    print("device.DeviceType: " + check_property(flowData.device.devicetype))
-    print("device.HardwareVendor: " + check_property(flowData.device.hardwarevendor))
-    print("device.BrowserName: " + check_property(flowData.device.browsername))
 
     data = { "devicetype" : check_property(flowData.device.devicetype),
     "hardwarevendor" : check_property(flowData.device.hardwarevendor),
-    "browsername" : check_property(flowData.device.browsername) }
+    "browsername" : check_property(flowData.device.browsername),
+    "priceband" : check_property(flowData.device.priceband),
+    "releaseage" : check_property(flowData.device.releaseage) }
 
     return data
