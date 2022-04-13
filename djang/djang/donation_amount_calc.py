@@ -31,8 +31,11 @@ def zip_to_income(data):
     cwd = os.getcwd()
     f = open(cwd + '/djang/static/djang/Zip_Table.json')
     zip_table = json.load(f)
-    income = int(zip_table[zip]['INCOME'])
-    print("\INCOME IS: "+str(zip)+"\n")
+    if(zip_table[zip]['INCOME']):
+        income = int(zip_table[zip]['INCOME'])
+    else:
+        income = 67251 # MEDIAN USA INCOME
+    print("\INCOME IS: "+str(income)+"\n")
 
     f.close()
     return income
