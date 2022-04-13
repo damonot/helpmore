@@ -25,13 +25,12 @@ def zip_to_income(data):
     zip = ip_info['zip']
     
     cwd = os.getcwd()
-    zip_table = pd.read_csv(cwd + '/djang/static/djang/US_Zip.csv',low_memory=False)
-    us_median_income_table = zip_table.loc[:, ['NAME', 'S1901_C01_012E']]
-    us_median_income_table['NAME'] = us_median_income_table['NAME'].map(lambda x: x.lstrip('ZCTA5').rstrip('aAbBcC'))
-    series = us_median_income_table['S1901_C01_012E'].where(us_median_income_table['NAME'] == ((' ')+ zip))
-    series = series.dropna()
-    result = int(series.iloc[0])
-    return (result)
+    f = open(cwd + '/djang/static/djang/Zip_Table.json')
+    zip_table = json.load(f)
+    income = int(zip_table[zip]['INCOME'])
+    f.close()
+    return income
+    
 
 def round_to_five(number):
     return 5 * round(number / 5)
