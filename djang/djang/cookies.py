@@ -9,17 +9,13 @@ def main(request):
 
 def getcookie(request):
     
-    print("\n\nCOOKIE...")
-    
-    print(request.COOKIES.get('donation', '0'))
-    print(type(request.COOKIES.get('donation', '0')))
     if(request.COOKIES.get('donation', '0') == "None"):
         # print("reached")
         donation_cookie = 0
     else:
         donation_cookie = int( request.COOKIES.get('donation', '0') )
 
-    print("dono cookie"+ str(donation_cookie))
+    print("GET COOKIE: "+ str(donation_cookie))
     return donation_cookie
 
 

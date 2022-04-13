@@ -12,12 +12,10 @@
 body {
     margin: 0;
     font-family: 'M PLUS Rounded 1c', sans-serif;
-    /* background: rgb(66,0,79); */
     font-weight: 300;
 }
 
 .bg {
-    /* background-image: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)), url('./media/pompom.jpg'); */
     background-image: url('./media/pompom.jpg');
     background-size: cover;
     filter: blur(3px);
@@ -39,10 +37,8 @@ h1, h2 {
     color: var(--textdark);
 }
 
-
 .title {
     display: flex;
-    /* outline: 1px solid salmon; */
     margin: 0 0 1rem 0;
     justify-content: center;
 }
@@ -51,19 +47,11 @@ nav {
     background-color: white;
     padding: .5em;
     font-size: 1.3rem;
-    /* height: 2vh; */
-
 } nav img {
     width: 8rem;
     height: auto;
     vertical-align: middle;
-}
-
-.cta {
-    font-size: 3rem;
-    text-align: left;
-    margin-left: 0;
-    padding-left: 1rem;
+    user-select: none;
 }
 
 .logo {
@@ -74,10 +62,10 @@ nav {
     padding: 0 8rem .25rem 8rem;
     background-color: white;
     border-radius: 0 0 10px 10px;
+    user-select: none;
 }
 
 .content  {
-    /* outline: 1px solid cyan; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -93,60 +81,61 @@ nav {
     -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
     -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
     padding-bottom: 2rem;
-}
-
-.card div {
+} .card div {
     margin: auto;
     /* outline: 1px solid red; */
     width: 95%;
-}
-
-.card p {
+} .card p {
     background-color: rgba(29, 102, 211, .12);
     color: var(--black);
     padding: 2rem;
     font-size: 1.2rem;
     text-align: center;
-}
-
-.card h2 {
+} .card h2 {
     font-weight: 400;
     text-align: center;
     margin: 0;
     padding: 1rem 0 .5rem 0;
 }
 
-.gift-boxes {
-    padding: 0 0 0 0;
-}
-
-ul.gift-boxes {
-    margin: 0;
-    text-align: center;
-    list-style: none;
+#id_my_field {
+    /* outline: 1px solid blue; */
     display: flex;
+} #id_my_field div.active {
+    background-color: var(--highlight);
+    color: white;
+} #id_my_field > div  {
+    all: none;
+    border: 1px solid var(--secondary);
+    padding: .75em 0 .75em 0em;
+    width: 18%;
+    display: flex;
+    text-align: center;
+    padding-right: .5rem;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+} #id_my_field label {
+    text-align: left;
+    /* outline: 1px solid red; */
+    width: fit-content;
+    margin: auto;
+    padding-right: .25rem;
+    user-select: none;
+    cursor: pointer;
+} input[type="radio"] {
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
 
-.gift-boxes div > div {
-    color: white;
-    font-size: 1.5rem;
-    width: 20%;
-    display: inline-block;
-    padding: .25em 1.5em .25em .5em;
-    margin: 1.5rem .4rem 0 .4rem;
-    background-color: var(--highlight);
-} .gift-boxes div > div:hover {
-    background-color: #97C858;
-    transition: .25s ease;
-}  .gift-boxes div > label:focus {
-    background-color: #97C858;
-    transition: .25s ease;
-} .gift-boxes input {
-    visibility: hidden;
-} .gift-boxes label {
-    cursor: pointer;
+.errorlist {
+    list-style: none;
+    color: red;
+    height: 0;
+    overflow: hidden;
+    text-align: center;
+    padding: 0;
 }
 
 .input h3 {
@@ -154,23 +143,29 @@ ul.gift-boxes {
     margin-bottom: .5rem;
     color: var(--secondary);
     font-weight: 300;
-}
-
-.input div {
+} .input div {
     text-align: left;
-    width: 100%;   
-}
-
-.input div input[type=text] {
-    outline: 10px solid blue;
-    width: 98%;
+    width: 100%;  
+    /* outline: 1px solid red;  */
+    border-radius: 3px;
+    margin: auto;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+} .input div input[type=text] {
+    width: inherit;
     height: 4rem;
     font-size: 3.5rem;
-    outline: 1px solid var(--primary);
-    padding: 0 0 .25rem 1rem;
     border: none;
-    border-radius: 3px;
+    margin: auto;
     color: var(--highlight);
+    text-align: center;
+} .input div input[type=text]:focus {
+    outline: none;
+}
+
+.donation {
+    border: 2px solid var(--primary);
 }
 
 .input div input[type=checkbox] {
@@ -183,7 +178,6 @@ ul.gift-boxes {
 }
 
 .button input {
-    /* outline: 1px solid blue; */
     margin: 1rem 0 1rem 0;
     width: 100%;
     padding: .5rem;
@@ -195,58 +189,11 @@ ul.gift-boxes {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-
+    user-select: none;
     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.171);
     /* -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
     /* -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54); */
 }
-
-.total {
-    text-align: center;
-    padding: 1rem;
-}
-
-.img {
-    width: 100%;
-    height: 37vh;
-    object-fit: cover;
-    overflow: hidden;
-    margin: 0;
-    display: flex;
-    border-radius: 25px;
-
-    box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
-    -webkit-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
-    -moz-box-shadow: 7px 6px 12px 0px rgba(0,0,0,0.54);
-}
-
-
-.fade {
-    border-radius: 50%;
-    display: inline-block;
-    position: relative;
-  }
-  .fade img {
-    border-radius: 50%;
-    display: block;
-    border: 1px solid #fff;
-  }
-  .fade:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-shadow: inset 10px 24px 40px 0px white, 
-      inset -10px -24px 40px 0px white, 
-      inset 20px -10px 40px 0px white, 
-      inset -20px 10px 40px 0px white;
-  }
-
-
 
   @media only screen and (max-width: 1000px) {
     .card {
@@ -258,17 +205,10 @@ ul.gift-boxes {
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 768px) {
     .content {
         width: 100%;
-        margin: 0;
+        margin: auto;
         justify-content: center;
-    }
-    .left {
-        width: 90%;
-    }
-    .right {
-        width: 0;
-        overflow: hidden;
     }
 }

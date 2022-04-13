@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from re import sub
+from django.shortcuts import render, redirect
 from requests import get
 from . import donation_amount_calc, cookies, fiftyone_api
 
-from .forms import DonationForm
+from .forms import MyCustomForm
 
 
 def writedono(list):
@@ -23,23 +24,42 @@ def index(request):
 
     lastdono = cookies.getcookie(request)
     ip = get('https://api.ipify.org').text
+
     recdono = donation_amount_calc.main(ip, lastdono, userinfo)
+    print(recdono)
 
-    writedono(recdono)
+    list_of_tuples=[    
+    (str(recdono[0]), str(recdono[0])),
+    (str(recdono[1]), str(recdono[1])),
+    (str(recdono[2]), str(recdono[2])),
+    (str(recdono[3]), str(recdono[3])),
+    (str(recdono[4]), str(recdono[4])),
+    ]
+    form = MyCustomForm(request.POST, my_choices=list_of_tuples)
 
-    context = {"recdono": recdono, "form": DonationForm()}
-
+    context = {"recdono": recdono, "form": form}
+    
     response = render(request, 'djang/index.html', context)
-    
-    form= DonationForm(request.POST or None)
-    
-    formdata = None
-    if form.is_valid():
-        formdata= form.cleaned_data.get("dono_options")
-        # print(data)
-        # print(recdono[data])
 
-    submitteddono = recdono[formdata]
-    cookies.setcookie(response, submitteddono)
-    return response
-    
+    form_select = None
+    if form.is_valid():
+        form_select= int(form.cleaned_data.get("my_field"))
+
+        if form_select is None:
+            submitteddono = lastdono
+        else:
+            submitteddono = form_select
+        print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
+
+        print("SETTING COOKIE TO: "+str(submitteddono))
+        #response.set_cookie("donation", submitteddono)
+        cookies.setcookie(response, submitteddono)
+        print(cookies.getcookie(request))
+
+        tip = int(submitteddono * .15)
+        link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
+        return redirect(link)
+        #return response
+    else:
+        cookies.setcookie(response, lastdono)
+        return response
