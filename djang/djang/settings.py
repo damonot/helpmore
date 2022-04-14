@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print(BASE_DIR)
+print("\n\n\t" +str(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -24,7 +24,7 @@ print(BASE_DIR)
 SECRET_KEY = 'django-insecure-jq6-6souel%s7y45tyq$!6=9d_+*2mv@5^ju$$dj0krquf^vf$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'helpmore.damonotero.tech', 'damonotero.tech/helpmore']
 
@@ -122,9 +122,9 @@ STATIC_URL = '/static/'
 # if not DEBUG: 
 #     STATIC_ROOT = '/home/django/www-data/site.com/static/'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'djang/static/'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'djang/static/'),
+]
 
 JS_URL = 'js/'
 
