@@ -124,8 +124,9 @@ if not DEBUG:
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'djang/static'),
 ]
+print("\n\n\t "+str(STATICFILES_DIRS))
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 
 JS_URL = 'js/'
 
