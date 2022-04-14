@@ -22,7 +22,10 @@ def index(request):
 
     print(userinfo)
 
-    client_ip = request.META['REMOTE_ADDR']
+    try:
+        client_ip = request.META['REMOTE_ADDR']
+    except:
+        client_ip = "0.0.0.0"
     
     print("\nCLIENT IP: "+str(client_ip)+"\n")
 
