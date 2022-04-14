@@ -119,11 +119,9 @@ USE_TZ = True
 
 
 if not DEBUG: 
-    STATIC_ROOT = '/helpmore/djang/djang/static/djang/'
+    STATIC_ROOT = '/helpmore/djang/djang/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'djang/static'),
-]
+STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
 print("\n\n\t "+str(STATICFILES_DIRS))
 
 STATIC_URL = '/djang/static/'
