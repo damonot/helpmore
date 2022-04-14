@@ -20,12 +20,17 @@ def index(request):
 
     userinfo = fiftyone_api.main(request)
 
-    #print(userinfo)
+    print(userinfo)
+
+    client_ip = request.META['REMOTE_ADDR']
+    
+    print("\nCLIENT IP: "+str(client_ip)+"\n")
 
     lastdono = cookies.getcookie(request)
-    ip = get('https://api.ipify.org').text
+    
+    #ip = get('https://api.ipify.org').text
 
-    recdono = donation_amount_calc.main(ip, lastdono, userinfo)
+    recdono = donation_amount_calc.main(str(client_ip), lastdono, userinfo)
     print(recdono)
 
     list_of_tuples=[    
