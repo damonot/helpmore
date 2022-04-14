@@ -126,7 +126,7 @@ STATICFILES_DIRS = [
 ]
 print("\n\n\t "+str(STATICFILES_DIRS))
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/djang/static/'
 
 JS_URL = 'js/'
 
