@@ -122,7 +122,7 @@ if not DEBUG:
     STATIC_ROOT = '/helpmore/djang/djang/static/djang/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '/static/'),
+    os.path.join(BASE_DIR, 'djang/static'),
 ]
 
 STATIC_URL = '/static/'
