@@ -118,13 +118,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-if not DEBUG: 
-    STATIC_ROOT = '/helpmore/djang/djang/static/'
+# if not DEBUG: 
+#     STATIC_ROOT = '/helpmore/djang/djang/static/'
 
 STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
 print("\n\n\t "+str(STATICFILES_DIRS))
 
-STATIC_URL = '/djang/static/'
+STATIC_URL = '/static/'
 
 JS_URL = 'js/'
 
