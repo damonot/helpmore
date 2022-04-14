@@ -1,3 +1,4 @@
+from http import client
 from re import sub
 from django.shortcuts import render, redirect
 from requests import get
@@ -20,21 +21,19 @@ def index(request):
 
     userinfo = fiftyone_api.main(request)
 
-    print(userinfo)
-
     try:
-        client_ip = request.META['REMOTE_ADDR']
+        if client_ip != '127.0.0.1':
+            client_ip = request.META['REMOTE_ADDR']
+        else:
+            client_ip == '8.8.8.8'
     except:
-        client_ip = "0.0.0.0"
-    
-    print("\nCLIENT IP: "+str(client_ip)+"\n")
+        client_ip = '8.8.8.8'
+
 
     lastdono = cookies.getcookie(request)
-    
-    #ip = get('https://api.ipify.org').text
 
     recdono = donation_amount_calc.main(str(client_ip), lastdono, userinfo)
-    print(recdono)
+
 
     list_of_tuples=[    
     (str(recdono[0]), str(recdono[0])),
@@ -49,6 +48,10 @@ def index(request):
     
     response = render(request, 'djang/index.html', context)
 
+
+    print("\n^CLIENT IP: "+str(client_ip)+\
+        "\nRECDONO: "+(str(recdono)))
+
     form_select = None
     if form.is_valid():
         form_select= int(form.cleaned_data.get("my_field"))
@@ -57,12 +60,12 @@ def index(request):
             submitteddono = lastdono
         else:
             submitteddono = form_select
-        print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
+        # print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
 
-        print("SETTING COOKIE TO: "+str(submitteddono))
+        # print("SETTING COOKIE TO: "+str(submitteddono))
         #response.set_cookie("donation", submitteddono)
         cookies.setcookie(response, submitteddono)
-        print(cookies.getcookie(request))
+        # print(cookies.getcookie(request))
 
         tip = int(submitteddono * .15)
         link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
