@@ -57,27 +57,32 @@ def regression(median_income,last_donation, fiftyone_data):
             'HardwareVendor':['Android','Apple','Android','Apple','Android','Apple','Apple','Apple','Android','Android',
                            'Android','Apple'],
             'BrowserName': ['Other', 'IE', 'Chrome', 'Chrome', 'Safari', 'Safari', 'Other', 'IE','Firefox','Firefox','Chrome',
-                       'Safari']
-            
-            
-           }
+                       'Safari'],
+            'DeviceType':['Desktop', 'Mobile','Desktop','Desktop','Mobile','Mobile','Mobile','Mobile','Mobile','Desktop',
+                         'Desktop','Deakstop'],
+            'Price-Band' :[600, 250, 350,899, 200, 1099, 200, 300, 130, 500, 700, 1999],
+            'Release-Age': [12,6,2,8,4,2,7,4,5,5,3,2 ]
+            }
 
     df = pd.DataFrame(data)
     #Encode Categorical Data
-    df = pd.get_dummies(df, columns=["HardwareVendor", 'BrowserName'])
+    df = pd.get_dummies(df, columns=["HardwareVendor", 'BrowserName','DeviceType'])
     #CleanUp Inputs
     last_donation = float(last_donation)
     hardware_vendor = fiftyone_data['hardwarevendor']
     browser_name = fiftyone_data['browsername']
-    #device_type = fiftyone_data['devicetype']
+    device_type = fiftyone_data['devicetype']
+    price_band = fiftyone_data['priceband']
+    release_age = int(fiftyone_data['releaseage'])
+
     
     
     if hardware_vendor == 'Apple':
-            hardware_vendor_apple = 1
-            hardware_vendor_android = 0
+        hardware_vendor_apple = 1
+        hardware_vendor_android = 0
     else:
-            hardware_vendor_android = 1
-            hardware_vendor_apple = 0
+        hardware_vendor_android = 1
+        hardware_vendor_apple = 0
             
             
     bnames = np.zeros(5,dtype=int)
@@ -93,23 +98,28 @@ def regression(median_income,last_donation, fiftyone_data):
         browser_name = 'Other'
         bnames[-1] = 1
     
-    x = df[['MedianIncome','PrevDonation','HardwareVendor_Android','HardwareVendor_Apple', 
-            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other']]
-    y = df['CurrDonation'].values.reshape(-1,1)
-    model = LinearRegression().fit(x, y)
+    price_band = price_band.split('-')
+    price_band = int(price_band[-1])
+    
 
-    #Predict Donation Amount
-    y_pred = model.predict([[median_income,
-                             last_donation, hardware_vendor_android, hardware_vendor_apple, 
-                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4]]])
-    pred_donation = round_to_five(y_pred[0][0])
     
     if last_donation != 0: 
-        sugg_donation = [last_donation,last_donation * 2, last_donation *3, last_donation * 4,last_donation*5]
-        return sugg_donation
+        x = df[['PrevDonation']]
+        y = df['CurrDonation'].values.reshape(-1,1)
+        model = LinearRegression().fit(x,y)
+        y_pred = model.predict([[last_donation]])
     else:
-        return (regression_to_donation(pred_donation))
-    
+        x = df[['MedianIncome','PrevDonation','HardwareVendor_Android','HardwareVendor_Apple', 
+            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other',
+           'DeviceType_Mobile','DeviceType_Desktop', 'Price-Band','Release-Age']]
+        y = df['CurrDonation'].values.reshape(-1,1)
+        model = LinearRegression().fit(x, y)
+        y_pred = model.predict([[median_income,last_donation, hardware_vendor_android, hardware_vendor_apple, 
+                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], device_mobile, device_desktop, price_band, release_age]])
+
+    pred_donation = round_to_five(y_pred[0][0])
+    bnames = np.zeros(5,dtype=int)
+    return (regression_to_donation(pred_donation))  
     #append df with median_income,last_donation, and curr donation when we have real data#
 
 def main(ip, lastdono, userinfo):
