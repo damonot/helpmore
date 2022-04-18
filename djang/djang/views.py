@@ -1,19 +1,11 @@
+from array import array
 from http import client
 from re import sub
 from django.shortcuts import render, redirect
 from requests import get
 from . import donation_amount_calc, cookies, fiftyone_api
+from .forms import DropdownForm, RadioForm, InputForm
 
-from .forms import MyCustomForm
-
-
-def writedono(list):
-    MyFile=open('dono.txt','w')
-
-    for element in list:
-        MyFile.write(str(element))
-        MyFile.write('\n')
-    MyFile.close()
 
 def index(request):
 
@@ -30,47 +22,71 @@ def index(request):
         client_ip = '8.8.8.8'
 
 
-    lastdono = cookies.getcookie(request)
+    previousDonation = cookies.getcookie(request)
 
-    recdono = donation_amount_calc.main(str(client_ip), lastdono, userinfo)
+    recommendedDonationsArray = donation_amount_calc.main(str(client_ip), previousDonation, userinfo)
+    
+    recomendedDonations = arrayToTupleList(recommendedDonationsArray)
 
+    radioDonations = RadioForm(request.POST, my_choices=recomendedDonations)
+    tipDropdowns = DropdownForm(request.POST, my_choices=recomendedDonations)
+    inputForm = InputForm()
 
-    list_of_tuples=[    
-    (str(recdono[0]), str(recdono[0])),
-    (str(recdono[1]), str(recdono[1])),
-    (str(recdono[2]), str(recdono[2])),
-    (str(recdono[3]), str(recdono[3])),
-    (str(recdono[4]), str(recdono[4])),
-    ]
-    form = MyCustomForm(request.POST, my_choices=list_of_tuples)
-
-    context = {"recdono": recdono, "form": form}
+    context = {"radio": radioDonations, "dropdown": tipDropdowns, "input": inputForm}
     
     response = render(request, 'djang/index.html', context)
 
+    # if request.method == 'POST':
+    #     data1 = radioDonations.cleaned_data.get("my_field")
+    #     data2 = tipDropdowns.cleaned_data.get("my_field")
+    #     # form3 = radioDonations.cleaned_data.get("my_field")
+    #     print(data1)
+    #     print(data2)
 
     print("\n^CLIENT IP: "+str(client_ip)+\
-        "\nRECDONO: "+(str(recdono)))
+        "\nrecommendedDonations: "+(str(recommendedDonationsArray)))
 
-    form_select = None
-    if form.is_valid():
-        form_select= int(form.cleaned_data.get("my_field"))
+    radio_select = None
+    if radioDonations.is_valid():
+        radio_select= int(radioDonations.cleaned_data.get("my_field"))
+        print("radio:" + str(radio_select))
 
-        if form_select is None:
-            submitteddono = lastdono
-        else:
-            submitteddono = form_select
-        # print("SELECTED: "+str(form_select)+ "\tSUBMITTED: "+str(submitteddono))
+        tip_select = int(tipDropdowns.cleaned_data.get("my_tip"))
+        print("tip:" + str(tip_select))
 
-        # print("SETTING COOKIE TO: "+str(submitteddono))
-        #response.set_cookie("donation", submitteddono)
-        cookies.setcookie(response, submitteddono)
-        # print(cookies.getcookie(request))
+        input_select = inputForm['my_input'].value()
+        print("input:" + str(input_select))
 
-        tip = int(submitteddono * .15)
-        link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
-        return redirect(link)
-        #return response
-    else:
-        cookies.setcookie(response, lastdono)
-        return response
+
+    
+
+    #     if radio_select is None:
+    #         submitteddono = previousDonation
+    #     else:
+    #         submitteddono = radio_select
+
+    # tip_select = 0
+    # if tipDropdowns.is_valid():
+    #     tip_select = int(tipDropdowns.cleaned_data.get("my_field"))
+    #     print("tip:" + str(tip_select))
+    #     # print("SELECTED: "+str(radio_select)+ "\tSUBMITTED: "+str(submitteddono))
+
+    #     # print("SETTING COOKIE TO: "+str(submitteddono))
+    #     #response.set_cookie("donation", submitteddono)
+    #     # cookies.setcookie(response, submitteddono)
+    #     # print(cookies.getcookie(request))
+
+    #     tip = int(submitteddono * .15)
+    #     link = "https://link.justgiving.com/v1/charity/donate/charityId/13441?donationValue="+str(submitteddono)+"&totalAmount="+str(submitteddono+tip)+"&currency=GBP&skipGiftAid=true&skipMessage=true"
+    #     return redirect(link)
+    #     #return response
+    # else:
+    #     cookies.setcookie(response, previousDonation)
+    return response
+
+def arrayToTupleList(arr):
+    tups = []
+    for x in arr:
+        t = (str(x), (x))
+        tups.append(t)
+    return tups

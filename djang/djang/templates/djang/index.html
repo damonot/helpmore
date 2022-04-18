@@ -20,27 +20,23 @@
 
 
       <div class="card">
-        <form action="" method="POST">
+        <form action="" method="POST" novalidate>
           {% csrf_token %}
           <h2>Select your gift amount</h2>
 
-          {{ form }}
+          {{ radio }}
 
           <div class="input">
-            <h3>Or, enter your own amount below.</h3>
-            <div class="donation">
-              <input type="text">
-            </div>
-            <div>
-              <input type="checkbox">
-              Hide donation amount from the public
-            </div>
+            <h3 class="italic">Or, enter your own amount below.</h3>
+            <span class="currencyinput">${{ input }}</span>
           </div>
           
-          <!-- <div><p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity.
-            Adding a small contribution on top of your donation means we can
-              continue to help more people. <a href="" class="help">Find out how</a></b></p>
-          </div> -->
+          <div>
+            <p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity. Adding a small contribution on top of your donation means we can continue to help more people. 
+              <a href="" class="help">Find out how</a></b>
+            </p>
+            {{ dropdown }}
+          </div>
           
           <div class="button">
             <input type="submit" value="Continue">
@@ -57,6 +53,14 @@
         $(this).addClass('active');
       });
     </script>
+
+    <!-- <script>
+      submitForms = function(){
+        console.log('ok'); //only for testing
+        document.forms["firstForm"].submit();
+        document.forms["secondForm"].submit();
+      }
+    </script> -->
 
   </body>
 </html>
