@@ -98,9 +98,10 @@ def regression(median_income,last_donation, fiftyone_data):
         browser_name = 'Other'
         bnames[-1] = 1
     
-    price_band = price_band.split('-')
-    price_band = int(price_band[-1])
-    
+    if (price_band != 'Unknown'):
+        price_band = price_band.split('-')
+        price_band = int(price_band[-1])
+    else: price_band = 0
 
     
     if last_donation != 0: 
@@ -111,11 +112,11 @@ def regression(median_income,last_donation, fiftyone_data):
     else:
         x = df[['MedianIncome','PrevDonation','HardwareVendor_Android','HardwareVendor_Apple', 
             'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other',
-           'DeviceType_Mobile','DeviceType_Desktop', 'Price-Band','Release-Age']]
+            'Price-Band','Release-Age']]
         y = df['CurrDonation'].values.reshape(-1,1)
         model = LinearRegression().fit(x, y)
         y_pred = model.predict([[median_income,last_donation, hardware_vendor_android, hardware_vendor_apple, 
-                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], device_mobile, device_desktop, price_band, release_age]])
+                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], price_band, release_age]])
 
     pred_donation = round_to_five(y_pred[0][0])
     bnames = np.zeros(5,dtype=int)
