@@ -105,9 +105,13 @@ def regression(median_income,last_donation, fiftyone_data):
         browser_name = 'Other'
         bnames[-1] = 1
     
+    print(price_band)
     if (price_band != 'Unknown'):
         price_band = price_band.split('-')
-        price_band = int(price_band[-1])
+        print("strip...")
+        price_band = price_band[-1]
+        price_band = int(float(price_band))
+        print(price_band)
     else: price_band = 0
 
     
