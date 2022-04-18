@@ -78,11 +78,11 @@ def regression(median_income,last_donation, fiftyone_data):
     
     
     if hardware_vendor == 'Apple':
-            hardware_vendor_apple = 1
-            hardware_vendor_android = 0
+        hardware_vendor_apple = 1
+        hardware_vendor_android = 0
     else:
-            hardware_vendor_android = 1
-            hardware_vendor_apple = 0
+        hardware_vendor_android = 1
+        hardware_vendor_apple = 0
             
             
     bnames = np.zeros(5,dtype=int)
@@ -102,12 +102,6 @@ def regression(median_income,last_donation, fiftyone_data):
     price_band = int(price_band[-1])
     
 
-
-    #Predict Donation Amount
-    y_pred = model.predict([[median_income,
-                             last_donation, hardware_vendor_android, hardware_vendor_apple, 
-                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4]]])
-    pred_donation = round_to_five(y_pred[0][0])
     
     if last_donation != 0: 
         x = df[['PrevDonation']]
