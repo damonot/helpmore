@@ -83,6 +83,13 @@ def regression(median_income,last_donation, fiftyone_data):
     else:
         hardware_vendor_android = 1
         hardware_vendor_apple = 0
+        
+    if device_type == 'Mobile':
+        device_mobile = 1
+        device_desktop = 0
+    else:
+        device_mobile = 0
+        device_desktop = 1
             
             
     bnames = np.zeros(5,dtype=int)
