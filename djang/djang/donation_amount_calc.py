@@ -134,4 +134,5 @@ def main(ip, lastdono, userinfo):
     apiresponse = ipxapi(ip)
     income = zip_to_income(apiresponse.text)
     donos = regression(income, lastdono, userinfo)
-    return donos
+    rounded_donos = [25*round(x/25) for x in donos]
+    return rounded_donos
