@@ -8,6 +8,7 @@
     --highlight: rgb(29, 102, 211);
     --textdark: #231F20;
     --black: #0F0E0E;
+    --purplelight: rgba(29, 102, 211, .12)
 }
 body {
     margin: 0;
@@ -86,11 +87,12 @@ nav {
     /* outline: 1px solid red; */
     width: 95%;
 } .card p {
-    background-color: rgba(29, 102, 211, .12);
+    background-color: var(--purplelight);
     color: var(--black);
-    padding: 2rem;
-    font-size: 1.2rem;
+    padding: 1.5rem;
+    font-size: 1rem;
     text-align: center;
+    margin-bottom: 0;
 } .card h2 {
     font-weight: 400;
     text-align: center;
@@ -138,7 +140,9 @@ nav {
     padding: 0;
 }
 
-.input h3 {
+.input {
+    text-align: center;
+}.input h3 {
     text-align: center;
     margin-bottom: .5rem;
     color: var(--secondary);
@@ -147,25 +151,53 @@ nav {
     text-align: left;
     width: 100%;  
     /* outline: 1px solid red;  */
-    border-radius: 3px;
+    border-radius: 5px;
     margin: auto;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
-} .input div input[type=text] {
-    width: inherit;
-    height: 4rem;
-    font-size: 3.5rem;
+} .input #id_my_input {
+    width: 80%;
+    height: 2.5rem;
+    font-size: 2rem;
     border: none;
     margin: auto;
     color: var(--highlight);
-    text-align: center;
-} .input div input[type=text]:focus {
+    text-align: left;
+} .input #id_my_input:focus {
     outline: none;
 }
 
-.donation {
-    border: 2px solid var(--primary);
+
+.tip {
+    width: 100% !important;
+    background-color: var(--purplelight);
+    text-align: center;
+}
+#id_my_tip {
+    width: 95%;
+    border: none;
+    text-align: left;
+    font-size: 1.5rem;
+    margin: 1rem;
+    background-color: white;
+    color: var(--secondary);
+}
+
+.currencyinput {
+    border: 1px inset rgb(0, 0, 0);
+    color: var(--highlight);
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: right;
+    margin: auto;
+}.currencyinput input {
+    border: 0;
+}
+
+.errorlist {
+    height: 0;
+    margin: 0;
 }
 
 .input div input[type=checkbox] {
@@ -211,4 +243,8 @@ nav {
         margin: auto;
         justify-content: center;
     }
+}
+
+.italic {
+    font-style: italic;
 }

@@ -11,7 +11,7 @@ def index(request):
 
     cookies.main(request)
 
-    userinfo = fiftyone_api.main(request)
+    userinfo = fiftyone_api.main(request) # Get MetaData
 
     try:
         if client_ip != '127.0.0.1':
@@ -25,23 +25,17 @@ def index(request):
     previousDonation = cookies.getcookie(request)
 
     recommendedDonationsArray = donation_amount_calc.main(str(client_ip), previousDonation, userinfo)
-    
     recomendedDonations = arrayToTupleList(recommendedDonationsArray)
+    recommendedTips = formatTip(recommendedDonationsArray[2])
 
     radioDonations = RadioForm(request.POST, my_choices=recomendedDonations)
-    tipDropdowns = DropdownForm(request.POST, my_choices=recomendedDonations)
+    tipDropdowns = DropdownForm(request.POST, my_choices=recommendedTips)
     inputForm = InputForm()
 
     context = {"radio": radioDonations, "dropdown": tipDropdowns, "input": inputForm}
     
     response = render(request, 'djang/index.html', context)
 
-    # if request.method == 'POST':
-    #     data1 = radioDonations.cleaned_data.get("my_field")
-    #     data2 = tipDropdowns.cleaned_data.get("my_field")
-    #     # form3 = radioDonations.cleaned_data.get("my_field")
-    #     print(data1)
-    #     print(data2)
 
     print("\n^CLIENT IP: "+str(client_ip)+\
         "\nrecommendedDonations: "+(str(recommendedDonationsArray)))
@@ -89,4 +83,15 @@ def arrayToTupleList(arr):
     for x in arr:
         t = (str(x), (x))
         tups.append(t)
+    return tups
+
+def formatTip(arr):
+    tips = [0]
+    for x in range (2,7) :
+        if (arr/x) not in tips:
+            tips.append(int(arr/x))
+    tips.sort()
+    tips = [5*round(x/5) for x in tips]
+    s = [("$"+str(x)+".00") for x in tips]
+    tups = arrayToTupleList(s)
     return tups
