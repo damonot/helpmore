@@ -5,6 +5,8 @@ import os
 from sklearn.linear_model import LinearRegression
 import numpy as np
 
+#TODO try-catch the zip
+
 def ipxapi(ip):
     url = "https://ipxapi.com/api/ip?ip="+ip
     
@@ -22,7 +24,10 @@ def ipxapi(ip):
 def zip_to_income(data):
     ip_info = data
     ip_info = json.loads(data)
-    zip = ip_info['zip']
+    try:
+        zip = ip_info['zip']
+    except:
+        zip = "29403"
 
     cwd = os.getcwd()
     f = open(cwd + '/djang/static/djang/Zip_Table.json')
@@ -31,8 +36,6 @@ def zip_to_income(data):
         income = int(zip_table[zip]['INCOME'])
     except:
         income = 67251 # MEDIAN USA INCOME
-    print("\ZIP: "+str(zip)+
-    "\nINCOME: "+str(income))
 
     f.close()
     return income
@@ -59,7 +62,7 @@ def regression(median_income,last_donation, fiftyone_data):
             'BrowserName': ['Other', 'IE', 'Chrome', 'Chrome', 'Safari', 'Safari', 'Other', 'IE','Firefox','Firefox','Chrome',
                        'Safari'],
             'DeviceType':['Desktop', 'Mobile','Desktop','Desktop','Mobile','Mobile','Mobile','Mobile','Mobile','Desktop',
-                         'Desktop','Deakstop'],
+                         'Desktop','Desktop'],
             'Price-Band' :[600, 250, 350,899, 200, 1099, 200, 300, 130, 500, 700, 1999],
             'Release-Age': [12,6,2,8,4,2,7,4,5,5,3,2 ]
             }
@@ -105,13 +108,13 @@ def regression(median_income,last_donation, fiftyone_data):
         browser_name = 'Other'
         bnames[-1] = 1
     
-    print(price_band)
+    # print(price_band)
     if (price_band != 'Unknown'):
         price_band = price_band.split('-')
-        print("strip...")
+        # print("strip...")
         price_band = price_band[-1]
         price_band = int(float(price_band))
-        print(price_band)
+        # print(price_band)
     else: price_band = 0
 
     
@@ -122,12 +125,14 @@ def regression(median_income,last_donation, fiftyone_data):
         y_pred = model.predict([[last_donation]])
     else:
         x = df[['MedianIncome','PrevDonation','HardwareVendor_Android','HardwareVendor_Apple', 
-            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other',
+            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other', 
+            #'DeviceType_Mobile','DeviceType_Desktop',
             'Price-Band','Release-Age']]
         y = df['CurrDonation'].values.reshape(-1,1)
         model = LinearRegression().fit(x, y)
         y_pred = model.predict([[median_income,last_donation, hardware_vendor_android, hardware_vendor_apple, 
-                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], price_band, release_age]])
+                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], #device_mobile, device_desktop,
+                             price_band, release_age]])
 
     pred_donation = round_to_five(y_pred[0][0])
     bnames = np.zeros(5,dtype=int)
@@ -136,7 +141,9 @@ def regression(median_income,last_donation, fiftyone_data):
 
 def main(ip, lastdono, userinfo):
     apiresponse = ipxapi(ip)
+    # print(apiresponse.text)
     income = zip_to_income(apiresponse.text)
     donos = regression(income, lastdono, userinfo)
+    print(donos)
     rounded_donos = [25*round(x/25) for x in donos]
     return rounded_donos
