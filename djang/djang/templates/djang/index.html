@@ -25,13 +25,13 @@
           {{ radio }}
 
           <div class="input">
-            <h3 class="italic">Or, enter your own amount below.</h3>
+            <h3 class="italic">Or, enter your own amount to help as much as possible.</h3>
             <span class="currencyinput">${{ input }}</span>
           </div>
           
           <div>
-            <p><b class=""><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity. Adding a small contribution on top of your donation means we can continue to help more people. 
-              <a href="" class="help">Find out how</a></b>
+            <p><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity. Adding a small contribution on top of your donation means we can continue to help more people. 
+              <a href="" class="help">Find out how</a>
             </p>
             <div class="tip">
               {{ dropdown }}
@@ -50,8 +50,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-      $('#id_my_field div').click(function () {
-        $('#id_my_field div').removeClass('active');
+      $('#id_my_radio label').click(function () {
+        $('#id_my_radio label').removeClass('active');
         $(this).addClass('active');
       });
     </script>
