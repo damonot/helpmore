@@ -57,14 +57,11 @@ def regression(median_income,last_donation, fiftyone_data):
     data = {'MedianIncome': [15000,20000,40000,75000,150000,200000,14000,27000,34000,50000,100000,250000], 
             'PrevDonation':[0,0,0,0,0,0,45,90,66,105,50,125],
             'CurrDonation':[100, 133.33, 233.33, 312.5, 375, 500, 83, 180,198.33,208.33,250,625],
-            'HardwareVendor':['Android','Apple','Android','Apple','Android','Apple','Apple','Apple','Android','Android',
-                           'Android','Apple'],
-            'BrowserName': ['Other', 'IE', 'Chrome', 'Chrome', 'Safari', 'Safari', 'Other', 'IE','Firefox','Firefox','Chrome',
-                       'Safari'],
-            'DeviceType':['Desktop', 'Mobile','Desktop','Desktop','Mobile','Mobile','Mobile','Mobile','Mobile','Desktop',
-                         'Desktop','Desktop'],
-            'Price-Band' :[600, 250, 350,899, 200, 1099, 200, 300, 130, 500, 700, 1999],
-            'Release-Age': [12,6,2,8,4,2,7,4,5,5,3,2 ]
+            'HardwareVendor':['Android', 'Apple', 'Apple','Apple','Android','Apple','Apple','Android','Apple','Android','Android','Android'],
+            'BrowserName': ['Chrome','Chrome','Firefox','Other','Other','Safari','Chrome','IE','IE','Firefox','Other','Safari'],
+            'DeviceType':['Mobile','Desktop','Desktop','Mobile','Mobile','Desktop','Mobile','Desktop','Mobile','Mobile','Desktop','Desktop'],
+            'Price-Band' :[200, 230, 350,899, 800, 1099, 130, 400, 250, 500, 700, 1999],
+            'Release-Age': [10,8,5,4,3,1,12,7,6,6,5,0 ]
             }
 
     df = pd.DataFrame(data)
@@ -104,7 +101,7 @@ def regression(median_income,last_donation, fiftyone_data):
         bnames[2] = 1
     if ("Internet Explorer") in browser_name:
         bnames[3] = 1
-    elif browser_name not in data['BrowserName']:
+    elif browser_name not in ['Chrome','Safari','Firefox','Internet Explorer']:
         browser_name = 'Other'
         bnames[-1] = 1
     
@@ -125,17 +122,15 @@ def regression(median_income,last_donation, fiftyone_data):
         y_pred = model.predict([[last_donation]])
     else:
         x = df[['MedianIncome','PrevDonation','HardwareVendor_Android','HardwareVendor_Apple', 
-            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other', 
-            #'DeviceType_Mobile','DeviceType_Desktop',
-            'Price-Band','Release-Age']]
+            'BrowserName_Chrome','BrowserName_Safari', 'BrowserName_Firefox', 'BrowserName_IE', 'BrowserName_Other',
+           'DeviceType_Mobile','DeviceType_Desktop','Release-Age']]
         y = df['CurrDonation'].values.reshape(-1,1)
         model = LinearRegression().fit(x, y)
-        y_pred = model.predict([[median_income,last_donation, hardware_vendor_android, hardware_vendor_apple, 
-                             bnames[0],bnames[1],bnames[2],bnames[3],bnames[4], #device_mobile, device_desktop,
-                             price_band, release_age]])
-
+        y_pred = model.predict([[median_income, last_donation, hardware_vendor_android, hardware_vendor_apple, bnames[0],
+                                 bnames[1], bnames[2], bnames[3], bnames[4], device_mobile, device_desktop, release_age
+                                ]])
     pred_donation = round_to_five(y_pred[0][0])
-    bnames = np.zeros(5,dtype=int)
+
     return (regression_to_donation(pred_donation))  
     #append df with median_income,last_donation, and curr donation when we have real data#
 
