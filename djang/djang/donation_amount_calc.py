@@ -141,7 +141,6 @@ def regression(median_income,last_donation, fiftyone_data):
 
 def main(ip, lastdono, userinfo):
     apiresponse = ipxapi(ip)
-    # print(apiresponse.text)
     income = zip_to_income(apiresponse.text)
     donos = regression(income, lastdono, userinfo)
     print(donos)

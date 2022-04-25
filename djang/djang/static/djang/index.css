@@ -257,6 +257,11 @@ nav {
 }
 
 @media only screen and (max-width: 768px) {
+
+    #id_my_radio label {
+        color: var(--highlight);
+    }
+
     .content {
         width: 100%;
         margin: auto;
@@ -266,11 +271,11 @@ nav {
     }
 
     .bg {
-        height: 45%;
+        height: 50%;
     }
 
     .logo {
-        width: 50px;
+        width: 75px;
         padding-left: 4rem;
         padding-right: 4rem;
     }
@@ -280,6 +285,8 @@ nav {
     #id_my_tip {
         margin-left: .5rem;
     }
+
+
 
     .card p {
         padding: .5rem;

@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-print("\n\n\t" +str(BASE_DIR))
+# print("\n\n\tBASEDIR:" +str(BASE_DIR))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -24,10 +24,9 @@ print("\n\n\t" +str(BASE_DIR))
 SECRET_KEY = 'django-insecure-jq6-6souel%s7y45tyq$!6=9d_+*2mv@5^ju$$dj0krquf^vf$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'helpmore.damonotero.tech', 'damonotero.tech/helpmore']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'helpmore.damonotero.tech', 'damonotero.tech/helpmore', '54.144.167.67']
 
 # Application definition
 
@@ -118,13 +117,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-# if not DEBUG: 
-#     STATIC_ROOT = '/helpmore/djang/djang/static/'
-
-STATICFILES_DIRS=[(os.path.join(BASE_DIR,'static'))]
-print("\n\n\t "+str(STATICFILES_DIRS))
+# print("\t\t\t\tSTATICROOT:"+str(STATIC_ROOT))
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = '/var/www/mysite/assets/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+
+# ]
 
 JS_URL = 'js/'
 

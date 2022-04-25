@@ -26,12 +26,12 @@
 
           <div class="input">
             <h3 class="italic">Or, enter your own amount to help as much as possible.</h3>
-            <span class="currencyinput">${{ input }}</span>
+            <span class="currencyinput">£{{ input }}</span>
           </div>
           
           <div>
             <p><span class="highlight">JustGiving</span> won't be charging a platform fee to the charity. Adding a small contribution on top of your donation means we can continue to help more people. 
-              <a href="" class="help">Find out how</a>
+              <a href="https://www.justgiving.com/about" class="help">Find out how</a>
             </p>
             <div class="tip">
               {{ dropdown }}
@@ -52,8 +52,15 @@
     <script>
       $('#id_my_radio label').click(function () {
         $('#id_my_radio label').removeClass('active');
+        $('#id_my_input').removeClass('active');
         $(this).addClass('active');
       });
+
+      $('#id_my_input').click(function () {
+        $('#id_my_radio label').removeClass('active');
+        $(this).addClass('active');
+      });
+
     </script>
 
     <!-- <script>
